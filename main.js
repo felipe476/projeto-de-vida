@@ -3,50 +3,44 @@ const textos = document.querySelectorAll(".aba-conteudo");
 
 for (let i = 0; i < botoes.length; i++) {
     botoes[i].onclick = function () {
-
         for (let j = 0; j < botoes.length; j++) {
             botoes[j].classList.remove("ativo");
             textos[j].classList.remove("ativo");
         }
-
         botoes[i].classList.add("ativo");
         textos[i].classList.add("ativo");
-    }
+    };
 }
 
 const contadores = document.querySelectorAll(".contador");
-const tempoObjetivo1 = new Date("2025-07-05T00:00:00");
-const tempoObjetivo2 = new Date("2025-08-05T00:00:00");
-const tempoObjetivo3 = new Date("2025-09-30T00:00:00");
-const tempoObjetivo4 = new Date("2025-10-01T00:00:00");
-
-const tempos = [tempoObjetivo1, tempoObjetivo2, tempoObjetivo3, tempoObjetivo4];
-
+const tempos = [
+    new Date("2025-07-05T00:00:00"),
+    new Date("2025-08-05T00:00:00"),
+    new Date("2025-09-30T00:00:00"),
+    new Date("2025-10-01T00:00:00")
+];
 
 function calculaTempo(tempoObjetivo) {
-    let tempoAtual = new Date();
-    let tempoFinal = tempoObjetivo - tempoAtual;
-    let segundos = Math.floor(tempoFinal / 1000);
-    let minutos = Math.floor(segundos / 60);
-    let horas = Math.floor(minutos / 60);
-    let dias = Math.floor(horas / 24);
+    const agora = new Date();
+    const diferenca = tempoObjetivo - agora;
 
-    segundos %= 60;
-    minutos %= 60;
-    horas %= 24;
-    if (tempoFinal > 0) {
-        return [dias, horas, minutos, segundos];
-    } else {
-        return [0, 0, 0, 0];
-    }
+    if (diferenca <= 0) return [0, 0, 0, 0];
+
+    const segundos = Math.floor(diferenca / 1000) % 60;
+    const minutos = Math.floor(diferenca / 1000 / 60) % 60;
+    const horas = Math.floor(diferenca / 1000 / 60 / 60) % 24;
+    const dias = Math.floor(diferenca / 1000 / 60 / 60 / 24);
+
+    return [dias, horas, minutos, segundos];
 }
 
 function atualizaCronometro() {
     for (let i = 0; i < contadores.length; i++) {
-        document.getElementById("dias" + i).textContent = calculaTempo(tempos[i])[0];
-        document.getElementById("horas" + i).textContent = calculaTempo(tempos[i])[1];
-        document.getElementById("min" + i).textContent = calculaTempo(tempos[i])[2];
-        document.getElementById("seg" + i).textContent = calculaTempo(tempos[i])[3];
+        const [d, h, m, s] = calculaTempo(tempos[i]);
+        document.getElementById("dias" + i).textContent = d;
+        document.getElementById("horas" + i).textContent = h;
+        document.getElementById("min" + i).textContent = m;
+        document.getElementById("seg" + i).textContent = s;
     }
 }
 
@@ -55,4 +49,4 @@ function comecaCronometro() {
     setInterval(atualizaCronometro, 1000);
 }
 
-comecaCronometro();
+document.addEventListener("DOMContentLoaded", comecaCronometro);
