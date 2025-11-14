@@ -16,7 +16,7 @@ const contadores = document.querySelectorAll(".contador");
 const tempos = [
     new Date("2025-12-05T00:00:00"),
     new Date("2026-01-05T00:00:00"),
-    new Date("2026-01-30T00:00:00"),
+    new Date("2026-02-30T00:00:00"),
     new Date("2026-03-01T00:00:00")
 ];
 
@@ -50,4 +50,5 @@ function comecaCronometro() {
 }
 
 document.addEventListener("DOMContentLoaded", comecaCronometro);
+
 
