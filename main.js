@@ -14,10 +14,10 @@ for (let i = 0; i < botoes.length; i++) {
 
 const contadores = document.querySelectorAll(".contador");
 const tempos = [
-    new Date("2025-07-05T00:00:00"),
-    new Date("2025-08-05T00:00:00"),
-    new Date("2025-09-30T00:00:00"),
-    new Date("2025-10-01T00:00:00")
+    new Date("2025-12-05T00:00:00"),
+    new Date("2026-01-05T00:00:00"),
+    new Date("2026-01-30T00:00:00"),
+    new Date("2026-03-01T00:00:00")
 ];
 
 function calculaTempo(tempoObjetivo) {
@@ -50,3 +50,4 @@ function comecaCronometro() {
 }
 
 document.addEventListener("DOMContentLoaded", comecaCronometro);
+
